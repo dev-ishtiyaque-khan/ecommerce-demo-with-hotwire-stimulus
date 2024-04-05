@@ -1,0 +1,12 @@
+<%= turbo_stream.update dom_id(@product, "reviews"), class: 'flex flex-col items-center' do %>
+  <% if @product.reviews.present? %>
+    <div>
+      <%= render @reviews %>
+    </div>
+    <% if @pagy.pages > 1 %>
+      <%== pagy_nav(@pagy) %>
+    <% end %>
+  <% else %>
+    <p class="text-center text-primary font-bold text-lg tracking-wider leading-loose capitalize">No Reviews, Please be the first to add</p>
+  <% end %>
+<% end %>

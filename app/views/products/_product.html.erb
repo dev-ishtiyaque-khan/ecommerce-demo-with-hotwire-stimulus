@@ -1,0 +1,35 @@
+<article class="product-card bg-white shadow rounded overflow-hidden shadow-xl shadow-slate-300 group">
+  <figure class="relative">
+    <% if product.images.present? %>
+      <%= image_tag product.primary_image, class: "w-full h-80 object-cover", alt: product.name %>
+    <% else %>
+      <%= image_tag "product.png", class: "w-full h-80 object-cover", alt: product.name %>
+    <% end %>
+    <figcaption class="py-4 px-4">
+      <%= link_to product_path(product.id), data: { turbo_frame: '_top' } do %>
+        <h4 class="product-name uppercase font-medium text-xl text-gray-800 hover:text-primary line-clamp-1 transition"><%= product.name %></h4>
+      <% end %>
+    </figcaption>
+  </figure>
+  <div class="product-details px-4">
+    <div class="price-details flex items-baseline mb-1 space-x-2">
+      <p class="product-price text-xl text-primary font-semibold">₹<%= discounted_price(product.price, product.discount) %></p>
+      <p class="original-price text-sm text-gray-400 line-through">₹<%= product.price %></p>
+    </div>
+    <div class="review-rating flex items-center py-1">
+      <div class="flex gap-1 text-sm text-yellow-400">
+        <%= content_tag :div, id: dom_id(product, "review_rating_summary"), class: "flex items-center mb-4" do %>
+          <%= render 'reviews/review_rating', rating: average_rating(product) %>
+        <% end %>
+        <div class="review-count text-xs text-gray-500">
+          <p>(<%= pluralize(product.reviews.count, 'review') %>)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= turbo_frame_tag dom_id(product, 'add_to_cart_button') do %>
+    <%= button_to carts_path(product_id: product.id), method: :post, disabled: out_of_stock?(product), class: "#{out_of_stock?(product) && 'disabled:opacity-50 disabled:pointer-events-none'} add-to-cart-btn block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition" do %>
+      <i class="fa-solid fa-bag-shopping"></i> Add to cart
+    <% end %>
+  <% end %>
+</article>

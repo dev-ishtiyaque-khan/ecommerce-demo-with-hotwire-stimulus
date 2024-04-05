@@ -1,0 +1,10 @@
+<%= turbo_stream.update "products" do %>
+  <% if @products.present? %>
+    <div class="grid md:grid-cols-3 grid-cols-2 gap-6">
+      <%= render @products %>
+    </div>
+    <%== pagy_nav(@pagy) %>
+  <% else %>
+    <%= render "products/no_product_found" %>
+  <% end %>
+<% end %>

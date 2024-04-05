@@ -1,0 +1,44 @@
+
+<!-- login -->
+<div class="contain py-16">
+  <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+    <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
+    <p class="text-gray-600 mb-6 text-sm">
+      welcome back customer
+    </p>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="space-y-4">
+        <div class="field">
+          <%= f.label :email, class: "text-gray-600" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400", placeholder: "user@example.com" %>
+        </div>
+        <div class="field">
+          <%= f.label :password, class: "text-gray-600" %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400", placeholder: "*******" %>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-6">
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-primary" %><br />
+        <% end %>
+      </div>
+      <div class="mt-4">
+        <div class="actions">
+          <%= f.submit "Login", class: "cursor-pointer block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium",  data: { turbo_frame: '_top' } %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="mt-4 text-center text-gray-600">
+      <p>Don't have account?
+        <%= link_to "Register now", new_registration_path(resource_name), class: "text-primary" %>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- ./login -->

@@ -1,0 +1,24 @@
+<%= turbo_stream.update dom_id(@product, "new_review"), '' %>
+
+<%= turbo_stream.prepend dom_id(@product, "reviews") do %>
+  <div class="w-full">
+    <%= render @review %>
+  </div>
+<% end %>
+
+<%= turbo_stream.remove("no-reviews-message") %>
+
+<%= turbo_stream.update dom_id(@product, "total_reviews_count") do %>
+  Total: <span class="font-medium"><%= pluralize(@product.reviews.count, 'review') %></span>
+<% end %>
+
+<%= turbo_stream.update dom_id(@product, "review_rating_summary") do %>
+  <%= render 'reviews/review_rating', rating: average_rating(@product) %>
+  <div class="text-xs text-gray-500 ml-3">
+    <% if @product.reviews %>
+      <p>(<%= pluralize(@product.reviews.count, 'review') %>)</p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>

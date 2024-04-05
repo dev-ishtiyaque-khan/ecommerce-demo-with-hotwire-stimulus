@@ -1,0 +1,35 @@
+<header class="py-3 shadow-sm bg-white">
+  <div class="container flex items-center justify-between">
+    <a href="#">
+      <%= image_tag "logo.svg" %>
+    </a>
+
+    <% if user_signed_in? %>
+      <div class="flex items-center space-x-4">
+        <div class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <div class="text-xs leading-3">
+            <%= link_to "Cart", carts_path, class: "navbar-link" %>
+          </div>
+          <%= turbo_frame_tag dom_id(current_user, "cart_items_count") do %>
+            <% if current_user_cart.cart_items.count > 0 %>
+              <div class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                <%= current_user_cart.cart_items.sum(:quantity) %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl px-4">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="text-xs leading-3">
+            <%= link_to "Account", edit_user_registration_path, class: "navbar-link" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</header>

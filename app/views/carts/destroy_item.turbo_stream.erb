@@ -1,0 +1,24 @@
+<%= turbo_stream.update dom_id(current_user_cart, "summary") do %>
+  <%= render 'cart_summary', cart: current_user_cart %>
+<% end %>
+
+<%= turbo_stream.remove dom_id(@cart_item, "cart") %>
+
+<%= turbo_stream.update dom_id(current_user, "cart_items_count") do %>
+  <% if current_user_cart.cart_items.count > 0 %>
+    <div class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+      <%= current_user_cart.cart_items.sum(:quantity) %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if current_user_cart.cart_items.empty? %>
+  <%= turbo_stream.update dom_id(current_user, "cart") do %>
+    <div class="mt-16 mx-auto">
+      <h1 class="text-3xl pb-12 font-normal text-gray-700">Shopping Cart</h1>
+      <%= render 'no_cart_item_found' %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>

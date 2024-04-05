@@ -1,0 +1,26 @@
+<aside class="w-full h-max bg-gray-50 mx-12 w-50 rounded-md font-sans">
+  <div class="m-8">
+    <h3 class="text-lg leading-5 font-medium opacity-80">Order Summary</h3>
+    <dl class="divide-y py-4 font-normal text-sm">
+      <div class="flex justify-between py-4">
+        <dt class="opacity-80">Subtotal</dt>
+        <dd class="font-semibold">₹<%= total(cart.cart_items) %></dd>
+      </div>
+      <div class="flex justify-between py-4">
+        <dt class="opacity-80">Shipping estimate</dt>
+        <dd class="font-semibold">₹50.00</dd>
+      </div>
+      <div class="flex justify-between py-4">
+        <dt class="opacity-80">Tax estimate</dt>
+        <dd class="font-semibold">₹32.00</dd>
+      </div>
+      <div class="flex justify-between py-4">
+        <dt class="font-semibold text-lg">Order total</dt>
+        <dd class="font-semibold">₹<%= (total(cart.cart_items) + 55 + 32).round(2) %></dd>
+      </div>
+    </dl>
+    <%= button_to "#", method: :post, class: 'block w-full py-1 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition' do %>
+      Checkout
+    <% end %>
+  </div>
+</aside>

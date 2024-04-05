@@ -1,0 +1,7 @@
+<%= turbo_frame_tag dom_id(@product, "new_review") do %>
+  <% if user_signed_in? %>
+    <%= render "reviews/form", product: @product, review: @review %>
+  <% else %>
+    <p>Please login</p>
+  <% end %>
+<% end %>

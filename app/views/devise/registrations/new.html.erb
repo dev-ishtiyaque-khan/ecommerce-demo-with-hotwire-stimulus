@@ -1,0 +1,46 @@
+
+<div class="contain py-16">
+  <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+    <h2 class="text-2xl uppercase font-medium mb-1">Create an account</h2>
+    <p class="text-gray-600 mb-6 text-sm">
+      Register for new customer
+    </p>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , data: { turbo: false }) do |f| %>
+      <div class="space-y-4">
+        <div class="field">
+          <%= f.label :name, class: "text-gray-600" %><br />
+          <%= f.text_field :name, class: "block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" %>
+        </div>
+        <div class="field">
+          <%= f.label :email, class: "text-gray-600" %><br />
+          <%= f.email_field :email, autocomplete: "email", class: "block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded placeholder-gray-400 #{text_field_css(resource, :email)}" %>
+          <%= inline_errors(resource, :email) %>
+        </div>
+        <div class="field">
+          <%= f.label :password, class: "text-gray-600" %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400 #{text_field_css(resource, :password)}", placeholder: "*******" %>
+          <%= inline_errors(resource, :password) %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation, class: "text-gray-600" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400", placeholder: "*******" %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="actions">
+          <%= f.submit "Create Account", class: "cursor-pointer block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="mt-4 text-center text-gray-600">
+      <p>Already have account?
+        <%= link_to "Login now", new_session_path(resource_name), class: "text-primary" %>
+      </p>
+    </div>
+  </div>
+</div>

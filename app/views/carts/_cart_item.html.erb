@@ -1,0 +1,44 @@
+<li class="p-6 flex shrink-0">
+  <figure class="h-52 w-44">
+    <%= image_tag cart_item.product_primary_image, class: "h-full w-full rounded object-cover object-center" %>
+  </figure>
+  <div class="px-4 flex flex-col grow justify-between">
+    <div class="grid grid-cols-2 justify-between">
+      <div>
+        <%= link_to product_path(cart_item.product_id), data: { turbo_frame: '_top' } do %>
+          <h3 class="product-name text-base font-medium text-gray-600 hover:text-primary transition"><%= cart_item.product.name %></h3>
+        <% end %>
+        <%= content_tag :p, cart_item.category.name, class: "text-gray-500 pt-1 font-light text-sm" %>
+        <%= content_tag :p, "Price: ₹ #{cart_item.product_price}", class: "text-gray-800 pt-1 font-medium text-sm" %>
+        <%= content_tag :p, "Subtotal: ₹ #{subtotal(cart_item)}", class: "text-gray-800 pt-1 font-medium text-sm" %>
+      </div>
+      <div class="flex justify-between">
+        <div>
+          <%= render 'update_cart_item_quantity', cart_item: cart_item %>
+        </div>
+        <div>
+          <%= button_to destroy_item_carts_path(item_id: cart_item.id), method: :post do %>
+            <svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="#d1cccc" class="h-3 w-3">
+              <path d="M5 5L19 19M5 19L19 5" stroke="#a1a1a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="flex text-sm text-slate-600 leading-8">
+        <% if cart_item.product_stock >= cart_item.quantity %>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="text-green-400 w-7 h-7">
+            <path d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
+          </svg>
+          <span class="px-2 font-semibold">In stock</span>
+        <% else %>
+          <svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7">
+            <path d="M16 8L8 16M8.00001 8L16 16" stroke="#e60f0f"></path>
+          </svg>
+          <span class="px-2 font-semibold">Out Of stock</span>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,30 @@
+<%= turbo_stream.update dom_id(current_user, "cart_items_count") do %>
+  <% if current_user_cart.cart_items.count > 0 %>
+    <div class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+      <%= current_user_cart.cart_items.sum(:quantity) %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update dom_id(@item.product, "add_to_cart_button") do %>
+  <%= button_to carts_path(product_id: @item.product_id), method: :post, disabled: out_of_stock?(@item.product), class: "#{out_of_stock?(@item.product) && "disabled:opacity-50 disabled:pointer-events-none"} add-to-cart-btn block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition" do %>
+    <i class="fa-solid fa-bag-shopping"></i> Add to car
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update dom_id(@item.product, "add_to_cart_button_show") do %>
+  <%= button_to carts_path(product_id: @item.product_id), method: :post, disabled: out_of_stock?(@item.product), class: "#{out_of_stock?(@item.product) && "disabled:opacity-50 disabled:pointer-events-none"} bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition" do %>
+    <i class="fa-solid fa-bag-shopping"></i> Add to cart
+  <% end %>
+<% end %>
+
+
+<%= turbo_stream.replace 'product_stock_availability' do %>
+  <p id="product_stock_availability">
+    <% if out_of_stock?(@item.product) %>
+      <span class="text-red-600">Unavailable</span>
+    <% else %>
+      <span class="text-green-600">In Stock</span>
+    <% end %>
+  </p>
+<% end %>

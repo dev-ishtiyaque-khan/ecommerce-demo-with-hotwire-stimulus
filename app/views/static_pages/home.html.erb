@@ -1,0 +1,43 @@
+<div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('<%= image_path("banner.jpg") %>');">
+  <div class="container">
+    <h1 class="text-5xl text-gray-800 font-medium mb-4 capitalize">
+        Discover Your Style, <br> Unleash Your FashionSaga
+    </h1>
+    <p>Discover the world of fashion at FashionSaga. <br> From trendy outfits to timeless classics, <br> we have something to suit every taste and occasion. </p>
+    <div class="mt-12">
+      <%= link_to "Shop Now", products_path, class: "bg-primary border border-primary text-white px-8 py-3 font-medium
+        rounded-md hover:bg-transparent hover:text-primary" %>
+    </div>
+  </div>
+</div>
+
+<!-- categories -->
+<div class="container py-16">
+  <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">shop by category</h2>
+  <div class="grid grid-cols-3 gap-3">
+    <% Category.all.limit(6).each do |category| %>
+      <div class="relative group">
+        <% if category.images.attached? %>
+          <%= image_tag category.primary_image, class: "w-full h-96 object-cover" %>
+        <% end %>
+        <%= link_to category.name, products_path(query: { category_id_eq: category.id }), class: "absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<!-- ./categories -->
+
+<!-- new arrival -->
+<div class="container pb-16">
+  <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">top new arrival</h2>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <% Product.with_attached_images.order(created_at: :desc).limit(16).each do |product| %>
+      <%= render 'products/product', product: product %>
+    <% end %>
+  </div>
+</div>
+<!-- ./new arrival -->
+
+<!-- ./footer -->
+<%= render "shared/footer" %>
+<!-- ./footer -->

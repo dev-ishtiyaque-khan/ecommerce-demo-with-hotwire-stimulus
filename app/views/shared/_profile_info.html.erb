@@ -1,0 +1,65 @@
+
+<!-- sidebar -->
+<div class="col-span-3">
+  <div class="px-4 py-3 shadow flex items-center gap-4">
+    <div class="flex-shrink-0">
+      <% if current_user.avatar.present? %>
+        <%= image_tag current_user&.avatar, class: "rounded-full w-14 h-14 border border-gray-200 p-1 object-cover" %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: "rounded-full h-14 w-14 object-cover" %>
+      <% end %>
+    </div>
+    <div class="flex-grow">
+        <p class="inline text-gray-600">Hello,</p>
+        <h4 class="inline text-gray-800 font-medium"><%= current_user.name %></h4>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
+    <div class="space-y-1 pl-8">
+      <a href="#" class="relative text-primary block font-medium capitalize transition">
+        <span class="absolute -left-8 top-0 text-base">
+            <i class="fa-regular fa-address-card"></i>
+        </span>
+        Manage account
+      </a>
+      <a href="#" class="relative hover:text-primary block capitalize transition">
+          Profile information
+      </a>
+      <a href="#" class="relative hover:text-primary block capitalize transition">
+          Change password
+      </a>
+    </div>
+
+    <div class="space-y-1 pl-8 pt-4">
+      <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
+        <span class="absolute -left-8 top-0 text-base">
+          <i class="fa-solid fa-box-archive"></i>
+        </span>
+        My order history
+      </a>
+      <a href="#" class="relative hover:text-primary block capitalize transition">
+        My returns
+      </a>
+      <a href="#" class="relative hover:text-primary block capitalize transition">
+        My Cancellations
+      </a>
+      <a href="#" class="relative hover:text-primary block capitalize transition">
+        My reviews
+      </a>
+      <a href="#" class="relative hover:text-primary block capitalize transition">
+        Invoices
+      </a>
+    </div>
+
+    <div class="space-y-1 pl-8 pt-4">
+      <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
+        <span class="absolute -left-8 top-0 text-base">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </span>
+        Logout
+      </a>
+    </div>
+  </div>
+</div>
+<!-- ./sidebar -->

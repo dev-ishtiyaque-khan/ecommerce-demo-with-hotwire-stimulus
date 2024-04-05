@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+      @apply font-poppins;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+      @apply font-roboto;
+  }
+}
+
+@layer components {
+  .size-selector input:checked + label {
+      @apply bg-primary text-white;
+  }
+  .color-selector input:checked + label {
+      @apply ring-2 ring-primary;
+  }
+
+  .input-box {
+      @apply block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded placeholder-gray-400 focus:border-primary focus:ring-0;
+  }
+}
+
+.pagy-nav.pagination {
+  @apply inline-flex -space-x-px rounded-md shadow-sm m-6;
+}
+
+.page.next a {
+  @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:border-red-500 hover:text-red-600 focus:z-20;
+}
+
+.page.prev a {
+  @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-500 hover:border-red-500 hover:text-red-600 focus:z-20;
+}
+
+.page.next.disabled {
+  @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-slate-100 px-8 py-2 text-sm font-medium text-gray-500 hover:border-red-500 hover:text-red-600 focus:z-20;
+}
+
+.page.prev.disabled {
+  @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-slate-100 px-8 py-2 text-sm font-medium text-gray-500 hover:border-red-500 hover:text-red-600 focus:z-20;
+}
+
+.page a, .page.gap {
+  @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center border px-6 py-2 text-sm font-medium focus:z-20;
+}
+
+.page.active {
+  @apply z-10 border border-red-600 bg-slate-100 text-red-600 relative inline-flex items-center px-6 py-2 text-sm font-medium focus:z-20;
+}
+
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

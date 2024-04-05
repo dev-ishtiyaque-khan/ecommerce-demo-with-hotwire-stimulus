@@ -1,0 +1,24 @@
+<div class="flex flex-cols justify-center bg-zinc-100 my-4 gap-2 flex-grow-1 px-3">
+  <div class="px-2 flex flex-col items-center basis-36 p-2 flex-grow-0 flex-shrink-0">
+    <div class="flex flex-col items-center">
+      <% if review.user.avatar.present? %>
+        <%= image_tag review.user&.avatar, class: "rounded-full h-14 w-14 object-cover" %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: "rounded-full h-14 w-14 object-cover" %>
+      <% end %>
+      <h4 class="text-gray-800 font-normal break-keep text-center"><%= review.user.name %></h4>
+    </div>
+  </div>
+  <div class="flex flex-col flex-grow my-4">
+    <div class="flex justify-between">
+      <div class="flex flex-col items-start font-medium capitalize">
+        <p><%= review.title %></p>
+        <div class="flex items-center my-1">
+          <%= render 'reviews/review_rating', rating: review.rating_before_type_cast %>
+        </div>
+      </div>
+      <p class="text-gray-600 font-normal"><%= review.created_at.strftime("%b %d, %Y") %></p>
+    </div>
+    <p class="mb-2 text-gray-500 dark:text-gray-400 break-all"><%= review.comment %></p>
+  </div>
+</div>

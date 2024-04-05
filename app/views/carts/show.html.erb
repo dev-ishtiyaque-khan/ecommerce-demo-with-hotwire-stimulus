@@ -1,0 +1,23 @@
+<section class="container">
+  <%= turbo_frame_tag dom_id(current_user, "cart") do %>
+    <div class="mt-16 mx-auto">
+    <h1 class="text-3xl pb-12 font-normal text-gray-700">Shopping Cart</h1>
+    <% if current_user_cart.cart_items.present? %>
+      <div class="grid grid-cols-2">
+        <ul class="border-t divide-y">
+          <% current_user_cart.cart_items.each do |cart_item| %>
+            <%= turbo_frame_tag dom_id(cart_item, "cart") do %>
+              <%= render 'cart_item', cart_item: cart_item %>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= turbo_frame_tag dom_id(current_user_cart, "summary") do %>
+          <%= render 'cart_summary', cart: current_user_cart %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= render 'no_cart_item_found' %>
+    <% end %>
+    </div>
+  <% end %>
+</section>

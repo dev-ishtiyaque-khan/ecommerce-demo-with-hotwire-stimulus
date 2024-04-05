@@ -1,0 +1,14 @@
+<!-- app/views/carts/update_quantity.html.erb -->
+<%= form_with(url: update_quantity_carts_path(cart_item.id), method: :patch, data: { controller: 'cart', turbo_stream: 'true', cart_stock_value: cart_item.product_stock }) do |form| %>
+  <div class="flex items-center justify-center">
+    <%= button_tag type: 'button', data: { action: "click->cart#update_quantity", quantity: "-1", cart_target: 'minusButton' }, class: "text-black border bg-slate-100 hover:bg-slate-300 px-4 py-2 rounded-md disabled:opacity-50 disabled:pointer-events-none" do %>
+      -
+    <% end %>
+
+    <%= form.number_field :quantity, value: cart_item.quantity, data: { cart_target: 'quantity' }, class: 'grow w-12 text-center bg-slate-50 rounded-md border-none number-input' %>
+
+    <%= button_tag type: 'button', data: { action: "click->cart#update_quantity", quantity: "1", cart_target: 'plusButton' }, class: "text-black border bg-slate-100 hover:bg-slate-300 px-4 py-2 rounded-md disabled:opacity-50 disabled:pointer-events-none" do %>
+      +
+    <% end %>
+  </div>
+<% end %>

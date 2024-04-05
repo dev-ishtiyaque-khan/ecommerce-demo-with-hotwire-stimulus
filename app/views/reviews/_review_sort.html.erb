@@ -1,0 +1,13 @@
+<%= search_form_for @query, url: product_path(product.id), data: { controller: 'filter', turbo_stream: 'true' } do |f| %>
+  <h3 class="inline text-lg text-gray-500 mb-3 pr-3">
+    <%= f.label :s, 'Sort by' %>
+  </h3>
+   <%= f.select :s, options_for_select(sort_review_option_list, params.dig(:query, :s)),
+      {},
+      {
+        data: { action: 'change->filter#update', filter_target: 'select' },
+        class: 'bg-gray-100 border-none hover:bg-gray-100 focus:ring-gray-400 ring-inset'
+      }
+    %>
+  </div>
+<% end %>
